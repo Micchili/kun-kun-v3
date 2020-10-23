@@ -13,6 +13,7 @@ firebaseConfig.json
 
 # production
 /build
+/public
 
 # misc
 .DS_Store
