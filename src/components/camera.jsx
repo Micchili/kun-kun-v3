@@ -8,8 +8,8 @@ class Camera extends React.Component {
     };
 
     capture = () => {
-    const imageSrc = this.webcam.getScreenshot({width: 1920, height: 1080});
-    alert(imageSrc);
+        const imageSrc = this.webcam.getScreenshot();
+        alert(imageSrc);
     };
 
     render() {
