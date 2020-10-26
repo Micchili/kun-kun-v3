@@ -9,7 +9,15 @@ class Camera extends React.Component {
 
     capture = () => {
         const imageSrc = this.webcam.getScreenshot();
-        alert(imageSrc);
+        var img = new Image();
+        img.src = imageSrc;
+
+        var canvas = document.getElementById("canvassample");
+        var canvasdraw = canvas.getContext("2d");
+        img.onload = function(){
+          canvasdraw.drawImage(img,0,0,1280,720);
+        }
+        //alert(imageSrc);
     };
 
     render() {
@@ -23,10 +31,10 @@ class Camera extends React.Component {
         <div>
         <Webcam
             audio={false}
-            height={350}
+            height={720}
             ref={this.setRef}
             screenshotFormat="image/jpeg"
-            width={350}
+            width={1280}
             videoConstraints={videoConstraints}
         /><br />
         <button onClick={this.capture}>base64を表示する</button>
