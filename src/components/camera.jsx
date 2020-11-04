@@ -2,6 +2,8 @@ import React from 'react';
 
 import Webcam from "react-webcam";
 
+import axios from 'axios';
+
 class Camera extends React.Component {
     setRef = webcam => {
        this.webcam = webcam;
@@ -20,11 +22,34 @@ class Camera extends React.Component {
         //alert(imageSrc);
     };
 
+    canvasBinary = (canvas) => {
+        var base64 = canvas.toDataURL('image/png'),
+            bin = atob(base64.replace(/^.*,/, '')),
+            buffer = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) {
+            buffer[i] = bin.charCodeAt(i);
+        }
+        return buffer;
+    }
+
+    postman = () => {
+        const url = "localhost:3001/post";
+        const params = new ArrayBuffer(8);
+
+        axios.post(url, params)
+        .then(function(response) {
+            // 成功時
+        })
+        .catch(function(error) {
+            // エラー時
+        });
+    };
+
     render() {
-    const videoConstraints = {
-        width: 1280,
-        height: 720,
-        facingMode: "user"
+        const videoConstraints = {
+            width: 1280,
+            height: 720,
+            facingMode: "user"
     };
 
     return (
@@ -38,6 +63,7 @@ class Camera extends React.Component {
             videoConstraints={videoConstraints}
         /><br />
         <button onClick={this.capture}>base64を表示する</button>
+        <button onClick={this.postman}>送信</button>
         </div>
     );
     }
