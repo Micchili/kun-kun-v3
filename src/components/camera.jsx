@@ -45,7 +45,7 @@ class Camera extends React.Component {
 
     postman = () => {
         const url = "https://localhost:3001";
-        
+
         axios.post(url, this.state.imageVinary)
         .then(function(response) {
             // 成功時
@@ -84,6 +84,11 @@ class Camera extends React.Component {
             /><br />
             <button onClick={this.capture}>base64を表示する</button>
             <button onClick={this.postman}>送信</button>
+
+            <noscript>You need to enable JavaScript to run this app.</noscript>
+            <div id="root"></div>
+            <canvas id = "canvassample" height="720" width="1280"></canvas>
+            <button onClick={this.setRef}>カメラをオンにする</button><br />
             </div>
         );
     }
