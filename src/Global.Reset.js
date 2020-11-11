@@ -100,4 +100,15 @@ button {
   padding: 0;
   appearance: none;
 }
+p {
+    @media screen and (min-width: 1024px) {
+    font-size: 1.5rem;
+    }
+    @media screen and (min-width: 768px) and (max-width: 1024px) {
+        font-size: 1.3rem;
+    }
+    @media screen and (max-width: 767px) {
+        font-size: 1rem;
+    }
+}
 `;
