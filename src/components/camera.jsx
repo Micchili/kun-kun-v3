@@ -90,13 +90,13 @@ class Camera extends React.Component {
         axios({
             method: 'post',
             url: endpoint,
-            
+
             params: {
                 returnFaceAttributes: 'emotion'
             },
 
             data: blob,
-            headers: { 
+            headers: {
                 'Ocp-Apim-Subscription-Key': subscriptionKey ,
                 "Content-Type": "application/octet-stream"
             }
