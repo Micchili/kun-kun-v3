@@ -1,6 +1,7 @@
 import React from 'react';
 import Webcam from "react-webcam";
 import axios from 'axios';
+import {Button} from './Button'
 
 class Camera extends React.Component {
     constructor() {
@@ -102,8 +103,9 @@ class Camera extends React.Component {
         }).then(function (res) {
             console.log('Status text: ' + res.status)
             console.log('Status text: ' + res.statusText)
+            console.log(res)
             res.data.forEach((face) => {
-                const resData = JSON.stringify(face.faceAttributes.emotion)
+                const resData = JSON.stringify(face)
                 console.log('Emotion: ' + resData)
             });
         }).catch(function (error) {
@@ -129,10 +131,9 @@ class Camera extends React.Component {
                     videoConstraints={videoConstraints}
                 /><br />
                 <button onClick={this.capture}>base64を表示する</button>
-                <button onClick={this.localPostman}>ローカルで送信</button>
-                <button onClick={this.servePostman}>サーバーに送信</button>
+                <Button onClick={this.localPostman}>ローカルで送信</Button>
+                <Button onClick={this.servePostman}>サーバーに送信</Button>
 
-                <noscript>You need to enable JavaScript to run this app.</noscript>
                 <div id="root"></div>
                 <canvas id="canvassample" height="720" width="1280"></canvas>
                 <button onClick={this.setRef}>カメラをオンにする</button><br />
