@@ -12,7 +12,7 @@ export const App = () => {
       <Styled.Global />
       {/* <Header /> */}
       <Router>
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/camera" component={Camera} />
       </Router>
     </>
