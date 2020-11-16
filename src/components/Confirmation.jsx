@@ -1,7 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const BackGround = styled.div`
+    z-index: 1;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0,0.4);
+    opacity: ${({ fade }) => (fade === "entered" ? 0.4 : 0)};
+    display: ${({ fade }) => (fade === "exited" ? "none" : "block")};
+`
+
 const Artcale = styled.article`
+    z-index: 100;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,11 +48,14 @@ const Small = styled.small`
 
 export const Confimation = ({isFade,children}) => {
     return(
+      <>
+        <BackGround fade={isFade} />
         <Artcale fade={isFade}>
             <P>このサイトでは、表情から検知されたデータをもとに匂いを決めています。</P>
             <P>そのため、カメラをオンにする必要があります。</P>
             {children}<br/>
             <Small>取得した顔のデータは、このサイトのみの使用に限定され、このサイトを離れると破棄されます</Small>
         </Artcale>
+      </>
     )
 }
