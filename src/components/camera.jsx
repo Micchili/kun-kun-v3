@@ -112,6 +112,13 @@ class Camera extends React.Component {
         });
     };
 
+    componentDidMount = () => {
+        this.intervalId = setInterval(()=>{
+            this.capture();
+            this.localPostman();
+        }, 30000);
+    }
+
     render() {
         const videoConstraints = {
             width: 1280,
@@ -129,13 +136,11 @@ class Camera extends React.Component {
                     width={1280}
                     videoConstraints={videoConstraints}
                 /><br />
-                <button onClick={this.capture}>base64を表示する</button>
+                <Button onClick={this.capture}>キャンバスに表示する</Button>
                 <Button onClick={this.localPostman}>ローカルで送信</Button>
                 <Button onClick={this.servePostman}>サーバーに送信</Button>
 
-                <div id="root"></div>
                 <canvas id="canvassample" height="720" width="1280"></canvas>
-                <button onClick={this.setRef}>カメラをオンにする</button><br />
             </div>
         );
     }
