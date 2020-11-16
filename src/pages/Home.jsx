@@ -11,10 +11,6 @@ const Buttons = styled.div`
     justify-content: space-around;
 `
 
-const BackGround = styled.div`
-    
-`
-
 export const Home = () => {
     const [fade, changeFade] = React.useState(false)
 
