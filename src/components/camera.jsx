@@ -74,7 +74,6 @@ class Camera extends React.Component {
 
 
     localPostman = () => {
-
         const subscriptionKey = process.env.REACT_APP_FACE_KEY;
         const endpoint = process.env.REACT_APP_FACE_URL;
         const canvas = document.getElementById("canvassample");
@@ -105,7 +104,7 @@ class Camera extends React.Component {
             console.log('Status text: ' + res.statusText)
             console.log(res)
             res.data.forEach((face) => {
-                const resData = JSON.stringify(face)
+                const resData = JSON.stringify(face.faceAttributes.emotion)
                 console.log('Emotion: ' + resData)
             });
         }).catch(function (error) {
