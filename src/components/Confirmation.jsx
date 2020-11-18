@@ -11,17 +11,15 @@ const BackGround = styled.div`
     right: 0;
     bottom: 0;
     margin: auto;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0,0,0,0.6);
     opacity: ${({ fade }) => (fade === "entered" ? 0.4 : 0)};
     display: ${({ fade }) => (fade === "exited" ? "none" : "block")};
 `
 
 const Artcale = styled.article`
+    padding: 30px;
     z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 500px;
+    height: 400px;
     width: 750px;
     position: absolute;
     top: 0;
@@ -31,7 +29,7 @@ const Artcale = styled.article`
     margin: auto;
     border: solid 5px #444444;
     border-radius: 50px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: #FFFFFF;
     transition: 0.5s;
     opacity: ${({ fade }) => (fade === "entered" ? 1 : 0)};
     display: ${({ fade }) => (fade === "exited" ? "none" : "block")};
@@ -52,7 +50,7 @@ export const Confimation = ({isFade,children}) => {
         <BackGround fade={isFade} />
         <Artcale fade={isFade}>
             <P>このサイトでは、表情から検知されたデータをもとに匂いを決めています。</P>
-            <P>そのため、カメラをオンにする必要があります。</P>
+            <P>そのため、くんくんを使うにはカメラをオンにする必要があります。</P>
             {children}<br/>
             <Small>取得した顔のデータは、このサイトのみの使用に限定され、このサイトを離れると破棄されます</Small>
         </Artcale>
