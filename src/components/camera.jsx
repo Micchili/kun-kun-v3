@@ -6,7 +6,7 @@ import {Button} from './Button'
 class Camera extends React.Component {
     constructor() {
         super();
-        this.state = { resData: null };
+        this.state = { emotionData: null };
         this.localPostman = this.localPostman.bind(this);
     }
 
@@ -61,10 +61,10 @@ class Camera extends React.Component {
 
 
     localPostman = () => {
+        const kaito = this;
         const subscriptionKey = process.env.REACT_APP_FACE_KEY;
         const endpoint = process.env.REACT_APP_FACE_URL;
         const canvas = document.getElementById("canvassample");
-        var resData = null;
 
         const base64 = canvas.toDataURL('image/jpeg', 1.0)
         // Base64からバイナリへ変換
@@ -92,7 +92,10 @@ class Camera extends React.Component {
             console.log('Status text: ' + res.statusText)
             console.log(res)
             res.data.forEach((face) => {
-                resData = JSON.stringify(face.faceAttributes.emotion)
+                const resData = JSON.stringify(face.faceAttributes.emotion)
+                kaito.setState({
+                    emotionData: resData,
+                });
                 console.log('Emotion: ' + resData)
             });
         }).catch(function (error) {
