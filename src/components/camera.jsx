@@ -6,7 +6,8 @@ import {Button} from './Button'
 class Camera extends React.Component {
     constructor() {
         super();
-        this.state = { imageVinary: null };
+        this.state = { emotionData: null };
+        this.localPostman = this.localPostman.bind(this);
     }
 
     setRef = webcam => {
@@ -23,21 +24,7 @@ class Camera extends React.Component {
         img.onload = function () {
             canvasdraw.drawImage(img, 0, 0, 1280, 720);
         }
-        this.canvasBinary(canvas);
     };
-
-    canvasBinary = (canvas) => {
-        var base64 = canvas.toDataURL('image/png'),
-            bin = atob(base64.replace(/^.*,/, '')),
-            buffer = new Uint8Array(bin.length);
-        for (var i = 0; i < bin.length; i++) {
-            buffer[i] = bin.charCodeAt(i);
-        }
-
-        this.setState({
-            imageVinary: buffer,
-        });
-    }
 
     servePostman = () => {
         const url = "https://localhost:4000";
@@ -74,6 +61,7 @@ class Camera extends React.Component {
 
 
     localPostman = () => {
+        const kaito = this;
         const subscriptionKey = process.env.REACT_APP_FACE_KEY;
         const endpoint = process.env.REACT_APP_FACE_URL;
         const canvas = document.getElementById("canvassample");
@@ -83,7 +71,7 @@ class Camera extends React.Component {
         var bin = atob(base64.replace(/^.*,/, ''));
         var buffer = new Uint8Array(bin.length);
         for (var i = 0; i < bin.length; i++) {
-          buffer[i] = bin.charCodeAt(i);
+        buffer[i] = bin.charCodeAt(i);
         }
         // Blobを作成
         var blob = new Blob([buffer.buffer]);
@@ -105,6 +93,9 @@ class Camera extends React.Component {
             console.log(res)
             res.data.forEach((face) => {
                 const resData = JSON.stringify(face.faceAttributes.emotion)
+                kaito.setState({
+                    emotionData: resData,
+                });
                 console.log('Emotion: ' + resData)
             });
         }).catch(function (error) {
@@ -112,12 +103,19 @@ class Camera extends React.Component {
         });
     };
 
-    componentDidMount = () => {
-        this.intervalId = setInterval(()=>{
-            this.capture();
-            this.localPostman();
-        }, 30000);
-    }
+    // componentDidMount = () => {
+    //     this.intervalId = setInterval(()=>{
+    //         var flag = true;
+    //         while (flag) {
+    //             this.capture();
+    //             this.localPostman();
+    //             if (this.state.resData != null) {
+    //                 flag = false;
+    //                 break;
+    //             }
+    //         }
+    //     }, 30000);
+    // }
 
     render() {
         const videoConstraints = {
