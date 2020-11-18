@@ -11,6 +11,14 @@ const Buttons = styled.div`
     justify-content: space-around;
 `
 
+const TitleWrap = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 400px;
+`
+
 export const Home = () => {
     const [fade, changeFade] = React.useState(false)
 
@@ -23,9 +31,11 @@ export const Home = () => {
     }
 
     return(
-        <div>
-            <Title title={"くんくん"} />
-            <Button onClick={handleOnFade}>使ってみる</Button>
+        <>
+            <TitleWrap>
+                <Title title={"Kunkun"} />
+                <Button onClick={handleOnFade}>使ってみる</Button>
+            </TitleWrap>
             <Transition in={fade} timeout={200}>
             {(state) => (
                 <Confimation isFade={state}>
@@ -38,6 +48,6 @@ export const Home = () => {
                 </Confimation>
             )}
             </Transition>
-        </div>
+        </>
     )
 }
