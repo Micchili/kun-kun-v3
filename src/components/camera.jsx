@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 import axios from 'axios';
 import {Button} from './Button'
 
+
+
 class Camera extends React.Component {
     constructor() {
         super();
@@ -103,19 +105,21 @@ class Camera extends React.Component {
         });
     };
 
-    // componentDidMount = () => {
-    //     this.intervalId = setInterval(()=>{
-    //         var flag = true;
-    //         while (flag) {
-    //             this.capture();
-    //             this.localPostman();
-    //             if (this.state.resData != null) {
-    //                 flag = false;
-    //                 break;
-    //             }
-    //         }
-    //     }, 30000);
-    // }
+    componentDidMount = () => {
+        const kaito = this;
+        var i = 10;
+        setTimeout(function run() {
+            i++;
+            if((kaito.state.emotionData == null)||(i >= 10)) {
+                kaito.capture();
+                kaito.localPostman();
+                i = 0;
+            }
+            setTimeout(run, 3000);
+        }, 3000);
+    }
+    
+    
 
     render() {
         const videoConstraints = {
@@ -137,6 +141,7 @@ class Camera extends React.Component {
                 <Button onClick={this.capture}>キャンバスに表示する</Button>
                 <Button onClick={this.localPostman}>ローカルで送信</Button>
                 <Button onClick={this.servePostman}>サーバーに送信</Button>
+
 
                 <canvas id="canvassample" height="720" width="1280"></canvas>
             </div>
