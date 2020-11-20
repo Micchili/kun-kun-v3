@@ -7,5 +7,5 @@ export const Main = styled.main`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #AACC66;
+    background-color: ${({ bgColor }) => (bgColor)};
 `
