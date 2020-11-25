@@ -40,7 +40,7 @@ export const Home = () => {
             {(state) => (
                 <Confimation isFade={state}>
                     <Buttons>
-                        <Link to={"/camera"}>
+                        <Link to={"/test"}>
                           <Button>同意する</Button>
                         </Link>
                         <Button onClick={handleOffFade}>拒否する</Button>
