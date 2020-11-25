@@ -15,7 +15,7 @@ class Test extends React.Component {
         this.webcam = webcam;
     };
 
-    testbtn = () => {
+    testsend = () => {
         const imageSrc = this.webcam.getScreenshot();
         var img = new Image();
         img.src = imageSrc;
@@ -33,7 +33,7 @@ class Test extends React.Component {
         var bin = atob(base64.replace(/^.*,/, ''));
         var buffer = new Uint8Array(bin.length);
         for (var i = 0; i < bin.length; i++) {
-        buffer[i] = bin.charCodeAt(i);
+            buffer[i] = bin.charCodeAt(i);
         }
         // Blobを作成
         var blob = new Blob([buffer.buffer]);
@@ -61,19 +61,25 @@ class Test extends React.Component {
                     kaito.setState({
                         emotionData: resData,
                     });
-                    console.log(this.state.emotionData)
-                    console.log('Emotion: ' + resData)
+                    console.log(kaito.state.emotionData)
                 });
             }).catch(function (error) {
                 console.log(error)
             });
         }
-
-        setTimeout(testtest(blob), 3000);
-    
+        testtest(blob);
     };
     
-    
+    testbtn = () => {
+        const kaito = this;
+
+        setTimeout(function run() {
+            if((kaito.state.emotionData == null)) {
+                kaito.testsend();
+                setTimeout(run, 3000);
+            }
+        }, 3000);
+    }
 
     render() {
         const videoConstraints = {
