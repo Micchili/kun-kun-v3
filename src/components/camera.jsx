@@ -118,8 +118,6 @@ class Camera extends React.Component {
             setTimeout(run, 3000);
         }, 3000);
     }
-    
-    
 
     render() {
         const videoConstraints = {
