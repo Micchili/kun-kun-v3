@@ -74,9 +74,12 @@ class Test extends React.Component {
         const kaito = this;
 
         setTimeout(function run() {
-            if((kaito.state.emotionData == null)) {
+            if(kaito.state.emotionData == null) {
                 kaito.testsend();
                 setTimeout(run, 3000);
+            } else {
+                alert("正常に動作しました");
+                window.location.href = "/camera";
             }
         }, 3000);
     }
