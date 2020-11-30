@@ -72,14 +72,13 @@ class Test extends React.Component {
     
     testbtn = () => {
         const kaito = this;
-
         setTimeout(function run() {
             if(kaito.state.emotionData == null) {
                 kaito.testsend();
                 setTimeout(run, 3000);
             } else {
                 alert("正常に動作しました");
-                window.location.href = "/camera";
+                window.location.replace("/camera");
             }
         }, 3000);
     }
@@ -91,6 +90,10 @@ class Test extends React.Component {
             facingMode: "user"
         };
 
+        window.history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', (e) => {
+            window.history.go(1);
+        });
         return (
             <div>
                 <Webcam
